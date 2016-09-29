@@ -2,16 +2,14 @@ export default function template_raw(data) {
  	return `
 		Hey Oles,
 
-		Someone submitted a message from the contact form on your website at "Andrienko.co".
+		Someone submitted a message from the contact bot on your website.
 
 		Here\'s what was submitted:
 
 		Name: ${data.name}
 		Email: ${data.email}
-		Message: ${data.message}
+		Inquiry: ${data.message}
 
-		Your welcome Oles. 
-
-		From Oles Bot :)
+		From Contact Bot :)
 	`;
 }

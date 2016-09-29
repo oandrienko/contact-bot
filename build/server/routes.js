@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (app) {
 	var router = _express2.default.Router();
 	router.post('/api/v1/message/converse', _message2.default.converse);
-	router.post('/api/v1/message/pull', _message2.default.pull);
+	// router.post('/api/v1/message/pull', message.pull);
 	app.use(router);
 };
 

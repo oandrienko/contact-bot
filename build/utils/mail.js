@@ -24,7 +24,8 @@ function sendAdminNotification(name, email, message, callback) {
   var mailClient = {
     service: process.env.ANDRIENKOCO_MAIL_SERVICE,
     user: process.env.ANDRIENKOCO_MAIL_USER,
-    pass: process.env.ANDRIENKOCO_MAIL_PASS
+    pass: process.env.ANDRIENKOCO_MAIL_PASS,
+    admin: process.env.ANDRIENKOCO_MAIL_ADMIN
   };
 
   //the two template string exports
@@ -41,8 +42,8 @@ function sendAdminNotification(name, email, message, callback) {
 
   var mailOptions = {
     from: mailClient.user,
-    to: 'andrienko@live.ca',
-    subject: '✔ Andrienko.co Contact Form',
+    to: mailClient.admin,
+    subject: '✉ Contact Bot Message - andrienko.co',
     text: text,
     html: html
   };

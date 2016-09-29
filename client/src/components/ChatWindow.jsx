@@ -22,6 +22,13 @@ let ChatWindow = ({messages, isFetching}) => (
 		}
 
 		{
+			messages.length === 0
+				? <p className="chat-empty">Enter a message to send to chatbot</p>
+				: null
+
+		}
+
+		{
 			isFetching
 				? (
 					<div className="chat-message">

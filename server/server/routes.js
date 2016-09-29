@@ -6,6 +6,6 @@ import message from '../controllers/message';
 export default function(app) {
 	let router = express.Router();
 	router.post('/api/v1/message/converse', message.converse);
-	router.post('/api/v1/message/pull', message.pull);
+	// router.post('/api/v1/message/pull', message.pull);
 	app.use(router);
 }

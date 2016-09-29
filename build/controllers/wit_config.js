@@ -6,13 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (actions) {
 	return new _nodeWit.Wit({
-		accessToken: 'L3JVFQEOLLQQAI3SVPZH4PNOV6CJ6WVL',
-		logger: new _nodeWit.log.Logger(_nodeWit.log.DEBUG),
+		accessToken: TOKEN,
+		logger: new _nodeWit.log.Logger(_nodeWit.log.INFO),
 		actions: actions
 	});
 };
 
 var _nodeWit = require('node-wit');
 
-//L3JVFQEOLLQQAI3SVPZH4PNOV6CJ6WVL
-var TOKEN = process.env.TOKEN;
+var TOKEN = process.env.BOT_TOKEN;

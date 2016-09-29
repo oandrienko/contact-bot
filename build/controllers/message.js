@@ -6,30 +6,35 @@ Object.defineProperty(exports, "__esModule", {
 
 var _nodeWit = require('node-wit');
 
-var _actions = require('./actions');
-
-var _actions2 = _interopRequireDefault(_actions);
-
 var _wit_config = require('./wit_config');
 
 var _wit_config2 = _interopRequireDefault(_wit_config);
 
+var _mail = require('./../utils/mail');
+
+var _mail2 = _interopRequireDefault(_mail);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import actions from './actions';
+var client = (0, _wit_config2.default)();
+
 var sessions = {};
-var client = (0, _wit_config2.default)(_actions2.default);
+var sessionManager = function sessionManager(user) {
+	var sessionId = void 0;
+	Object.keys(sessions).forEach(function (k) {
+		if (sessions[k].user === user) {
+			sessionId = k;
+		}
+	});
+	if (!sessionId) {
+		sessionId = user;
+		sessions[sessionId] = { user: user, context: {} };
+	}
+	return sessionId;
+};
 
 exports.default = {
-	pull: function pull(req, res) {
-
-		if (!req.body) return res.sendStatus(400);
-
-		var user = req.body.user;
-		client.converse(user).then(function (data) {
-			console.log('Response from bot [/pull] => ' + JSON.stringify(data));
-			res.json(data);
-		});
-	},
 	converse: function converse(req, res) {
 
 		if (!req.body) return res.sendStatus(400);
@@ -37,10 +42,23 @@ exports.default = {
 		var _req$body = req.body;
 		var user = _req$body.user;
 		var message = _req$body.message;
-		var context = _req$body.context;
 
-		client.converse(user, message, context).then(function (data) {
-			console.log('Response from bot [/converse] => ' + JSON.stringify(data));
+
+		var sessionId = sessionManager(user);
+
+		client.converse(user, message).then(function (data) {
+
+			if (data.entities) {
+				sessions[sessionId].context = Object.assign(sessions[sessionId].context, data.entities);
+			}
+
+			if (data.type === 'action' && data.action === 'sendEmail') {
+				var c = sessions[sessionId].context;
+				(0, _mail2.default)(c.contact[0].value, c.email[0].value, c.inquiry[0].value, function (e) {
+					return console.log('Email sent... error => ', e);
+				});
+			}
+
 			res.json(data);
 		});
 	}

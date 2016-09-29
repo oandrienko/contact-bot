@@ -1,13 +1,14 @@
 import nodemailer from 'nodemailer';
-import template  from './template'
-import template_raw from './template_raw'
+import template  from './template';
+import template_raw from './template_raw';
 
 export default function sendAdminNotification(name, email, message, callback) {
 
   let mailClient = {
     service: process.env.ANDRIENKOCO_MAIL_SERVICE,
     user: process.env.ANDRIENKOCO_MAIL_USER,
-    pass: process.env.ANDRIENKOCO_MAIL_PASS
+    pass: process.env.ANDRIENKOCO_MAIL_PASS,
+    admin: process.env.ANDRIENKOCO_MAIL_ADMIN
   };
 
   //the two template string exports
@@ -24,8 +25,8 @@ export default function sendAdminNotification(name, email, message, callback) {
 
   let mailOptions = {
       from: mailClient.user,
-      to: 'andrienko@live.ca',
-      subject: '✔ Andrienko.co Contact Form',
+      to: mailClient.admin,
+      subject: '✉ Contact Bot Message - andrienko.co',
       text: text, 
       html: html,
   };

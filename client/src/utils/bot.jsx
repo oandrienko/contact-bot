@@ -1,8 +1,9 @@
-const base = 'http://localhost:8000/api/v1/';
+const base = 'https://the-contact-bot.herokuapp.com/api/v1/';
+// const base = 'http://localhost:8000/api/v1/';
 
 export default {
 
-	sendMessage(user, message, context) {
+	sendMessage(user, message) {
 		let endpoint = base+'message/converse';
 		console.log('AJAX: Sending Message to server [/converse]....');
 		return new Promise( resolve => {
@@ -11,8 +12,7 @@ export default {
 				url: endpoint,
 				data: {
 					user,
-					message,
-					context
+					message
 			  	}
 			}).done(function (results) {
 				console.log('AJAX: Response from AJAX call [/converse]=> ', results);
@@ -24,14 +24,15 @@ export default {
 	},
 
 	pullMessage(user) {
-		let endpoint = base+'message/pull';
+		let endpoint = base+'message/converse';
 		console.log('AJAX: Sending Message to server [/pull]....');
 		return new Promise( resolve => {
 			$.ajax({
 				method: "POST",
 				url: endpoint,
 				data: {
-					user
+					user,
+					message: null
 			  	}
 			}).done(function (results) {
 				console.log('AJAX: Response from AJAX call [/pull]=> ', results);

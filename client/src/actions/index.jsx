@@ -23,17 +23,23 @@ export const sendMessage = (user, message, context) => (dispatch) => {
 	dispatch(requestMessage(user, message));
 
 	return Bot.sendMessage(user, message, context).then(resolve => {
-		dispatch(receiveMessage(resolve));
+		
+		if (resolve.msg && resolve.msg.length > 0)
+			dispatch(receiveMessage(resolve));
 
 		//Keep sending requests until wit response type is 'stop';
 		let res_type = null;
 		async.whilst(
 			() => res_type !== 'stop', 
 			(next) => {
-				console.log('Calling Bot.pullMessage from async.whilst...');
 				Bot.pullMessage(user).then(resolve => {
-					if (resolve.type !== 'stop')
+					if (resolve.type !== 'stop' && resolve.type !== 'action') {
+						// if (resolve.confidence < 0.02) {
+						// 	resolve.msg = "My sole purpose is to forward Oles inquiries. " +
+						// 		"Would you like me to him send something?";
+						// }
 						dispatch(receiveMessage(resolve));
+					}
 					res_type = resolve.type;
 					next();
 				});
