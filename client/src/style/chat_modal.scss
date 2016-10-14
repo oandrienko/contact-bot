@@ -1,0 +1,258 @@
+/**
+*  'modal' STYLES
+*/
+
+@import '~stylesRoot/base.scss';
+
+.ReactModal__Body--open {
+	@extend .no-scroll;
+}
+
+.ReactModal__Overlay {
+	z-index: 998;
+
+	.mainContact__modal {
+		position: absolute;
+	    max-height: calc(80% - 60px);
+	    width: 80%;
+	    max-width: 500px;
+	    background: white;
+	    border: 1px grey solid;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    z-index: 999;
+	    margin-top:60px;
+	   	outline: 0;
+	    border-radius: 5px;
+	    background-color: #fefefe;
+	    border: 1px solid #ddd;
+	    box-shadow: 0 1px 5px 0 rgba(0,0,0,.3);
+	    overflow: hidden;
+
+	    display: flex;
+	    box-sizing: border-box;
+	    -webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	    flex-direction: column;
+
+	    .modal-header {
+	    	display: flex;
+		    justify-content: flex-start;
+		    position: fixed;
+		    width: 100%;
+		    height: 38px;
+		    background: white;
+		    left: 0;
+
+		    .close-button {
+		    	position: relative;
+			    outline: none;
+			    background: none;
+			    border: none;
+			    padding: 0;
+			    margin: 0;
+			    border-radius: 100%;
+			    border: 1px solid;
+			    height: 13px;
+			    line-height: 9px;
+			    margin-left: 7px;
+			    margin-top: 7px;
+			    text-align: center;
+			    width: 13px;
+
+			    .close-button--label {
+			    	opacity: 0;
+
+			    	&:hover {
+			    		transition: opacity .15s;
+			    		opacity: 1;
+			    	}
+
+			    }
+		    }
+
+		    .yellow-tint {
+		    	background-color: #ffc600;
+    			border-color: #f0ba00;
+    			font-size: 13px;
+
+		    }
+
+		    .green-tint {
+		    	background-color: #90cb66;
+    			border-color: #88c75b;
+    			font-size: 16px;
+
+		    }
+
+		    .red-tint {
+		    	background-color: #e26969;
+			    border-color: #e05c5c;
+			    font-size: 16px;
+		    }
+
+		    .modal-title {
+		    	position: absolute;
+		    	right: 7px;
+		    	top: 7px;
+		    	font-size: 20px;
+		    }
+		}
+
+		.chat-box {
+			// display: flex;
+    		flex-direction: column;
+			border-top: 1px solid #ddd;
+		    padding: 15px 12px;
+		    min-height: 300px;
+		    overflow: auto;
+		    margin-top: 38px;
+
+		    .chat-empty {
+		    	text-align: center;
+		    	padding: 10px;
+		    	color: #aaa;
+		    }
+
+		    .chat-message {
+
+		    	display: flex;
+    			flex-direction: column;
+    			font-weight: lighter;
+
+		    	.message-left {
+		    		display: flex;
+				    flex-direction: row;
+				    justify-content: center;
+				    align-items: baseline;
+				    margin-bottom: 10px;
+				    align-self: flex-start;
+
+    				.grey-bubble {
+    					background: rgba(0,0,0,.04);
+    					color: #333;
+    				}
+
+		    	}
+
+		    	.message-right {
+		    		display: flex;
+				    flex-direction: row;
+				    justify-content: center;
+				    align-items: baseline;
+				    margin-bottom: 10px;
+				    align-self: flex-end;
+
+
+		    		.blue-bubble {
+    					background: #208bf5;
+    					color: #fff;
+    				}
+
+		    	}
+
+		    	.message-bubble {
+		    		box-sizing: border-box;
+		    		padding: 7px 16px;
+    				border-radius: 1.3em;
+    				max-width: 220px;
+		    	}
+
+		    	.sm-padding {
+		    		padding: 2px 10px;
+		    	}
+
+		    	.message-timestamp {
+		    		color: #aaa;
+				    font-size: 10px;
+				    margin-left: 7px;
+				    margin-right: 7px;
+
+		    	}
+		    }
+		}
+
+		.chat-input {
+	    	border-top: 1px solid #ddd;
+			padding: 6px 5px;
+			height: 38px;
+
+			.chat-input--fill {
+				-webkit-appearance: none;
+			    height: 100%;
+			    border: none;
+			    padding: 0 0 0 10px;
+			    margin: 0;
+			    width: 85%;
+			    float: left;
+
+			    &:focus {
+			    	outline: none;
+				}
+			}
+
+
+			.chat-input--bg {
+				right: 6px;
+			    -webkit-appearance: none;
+			    height: 100%;
+			    width: calc(15% - 19px);
+			    float: right;
+			    padding: 0;
+			    margin: 0;
+			    background: none;
+			    border: none;
+			    padding-top: 5px;
+
+			    &:focus {
+			    	outline: none;
+				}
+			}
+
+	    }
+
+	}
+}
+
+@media screen and (max-width: $mobile-lg-size) {
+
+  .ReactModal__Overlay {
+	.mainContact__modal {
+		width: 85%;
+	    padding: 20px 10px 10px;
+	    max-height: calc(80% - 60px);
+
+	    .chat-box {
+		    min-height: 180px;
+		}
+
+		.chat-input {
+
+			.chat-input--fill {
+			    width: 75%;
+
+			}
+
+
+			.chat-input--bg {
+			    width: 15%;
+
+			}
+		}
+
+	    h2 {
+	    	font-size: 1.5em;
+	    }
+
+	    form {
+
+	    	input,
+	    	input[type='text'],
+	    	textarea {
+				padding-left: 0;
+	    	}
+		}
+  	}
+  }
+
+}
