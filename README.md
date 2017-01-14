@@ -1,36 +1,26 @@
 # Contact Bot
 
-Replace that boring old contact form with your own chatbot. Interface through a React component that shows up as a modal on your React site.
+Replace that boring old contact form with your own chatbot-like form. Interface through a React component that shows up as a modal on your React based site.
 
 ### Installing
 
 ```
-git clone https://github.com/oandrienko/contact-bot
-cd contact-bot
-npm install
+npm install https://github.com/oandrienko/contact-bot.git --save
 ```
 
-To start the server:
+Import the client module into your React app with:
 
 ```
-npm start
+import ContactBot from 'contact-bot';
+import 'contact-bot/lib/styles.css';
+
+// ...
+const form = <ContactModal
+	loaderImagePath={"/bundles/loader.gif"}
+	isOpen={this.state.modalIsOpen}
+	onClose={this.closeModal}
+	onSubmitMessageThread={testEndOfMessageThread}
+/>;
+
+// render it somewhere
 ```
-
-Import the client module into your app with:
-
-```
-import ContactBot from '../components/client'; //ES6
-```
-
-## Built With
-
-* ...
-
-## Tools Used
-
-* ...
-
-## TODO
-
-* ...
-
