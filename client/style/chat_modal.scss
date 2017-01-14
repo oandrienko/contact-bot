@@ -2,8 +2,6 @@
 *  'modal' STYLES
 */
 
-@import '~stylesRoot/base.scss';
-
 .ReactModal__Body--open {
 	@extend .no-scroll;
 }

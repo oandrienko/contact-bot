@@ -1,6 +1,6 @@
 {
   "name": "contact-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Replace your boring contact form with a chatbot.",
   "private": false,
   "repository": {
@@ -13,12 +13,11 @@
     "node": "6.2.2"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node server/server.jsx",
+    "dev": "nodemon --exec babel-node server/app.js",
     "wp-dev": "webpack && webpack-dev-server",
     "clean": "rm -rf build && mkdir build",
-    "bundle": "webpack -p --config webpack.prod.config.js",
-    "build": " babel server --out-dir build",
-    "start": "node build/app.js"
+    "build": "webpack -p --config webpack.prod.config.js",
+    "start": "node build/server.ContactBot.js"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
@@ -28,15 +27,17 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "clean-webpack-plugin": "^0.1.9",
+    "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.8.0",
     "nodemon": "^1.9.2",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "style-loader": "^0.13.1",
+    "css-loader": "^0.26.1"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "cli-color": "^1.1.0",
     "cors": "^2.8.1",
     "errorhandler": "^1.4.3",
     "express": "^4.14.0",
@@ -47,7 +48,6 @@
     "morgan": "^1.7.0",
     "node-wit": "^4.1.0",
     "nodemailer": "^0.7.1",
-    "radium": "^0.18.1",
     "react": "^15.1.0",
     "react-addons-update": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -55,6 +55,8 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.5.1",
     "redux": "^3.6.0",
+    "redux-form": "^5.3.2",
+    "redux-thunk": "^2.1.0",
     "request": "^2.75.0"
   }
 }

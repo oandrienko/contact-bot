@@ -1,31 +1,30 @@
 var webpack = require('webpack');
+var path = require('path');
 
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const PATHS = {
-  root: path.join(__dirname, 'client'),
-  dist: path.join(__dirname, 'client/dist'),
-  src: path.join(__dirname, 'client/src')
+  dist: path.join(__dirname, 'build'),
+  src1: path.join(__dirname, 'client'),
+  src2: path.join(__dirname, 'server')
 };
 
 module.exports = {
-  entry: {
-    'ContactBot': ['react', PATHS.src],
-    // vendor: ['react', 'react-dom', 'jquery']
-  },
   target: 'node',
+  entry: {
+    client: ['react', PATHS.src1],
+    server: [PATHS.src2]
+  },
   output: {
     path: PATHS.dist,
-    filename: '[name]-[hash].js'
+    filename: '[name].ContactBot.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      src: PATHS.src,
-      root: PATHS.root
+      stylesRoot: PATHS.src1 + '/style',
+      src: PATHS.src1
     }
   },
   module: {
@@ -34,6 +33,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel'
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader", "sass-loader")
       }
     ]
   },
@@ -50,6 +53,7 @@ module.exports = {
         except: ['$', 'webpackJsonp']
       }
     }),
+    new ExtractTextPlugin('contact_bot.css'),
     new webpack.DefinePlugin({
       "process.env": {
         // to require styles with webpack

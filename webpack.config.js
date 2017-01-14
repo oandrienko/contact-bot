@@ -1,27 +1,26 @@
 var webpack = require('webpack');
-const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 const PATHS = {
-  root: path.join(__dirname, 'client'),
-  dist: path.join(__dirname, 'client/dist'),
-  src: path.join(__dirname, 'client/src')
+  dist: path.join(__dirname, 'build'),
+  src1: path.join(__dirname, 'client'),
+  src2: path.join(__dirname, 'server')
 };
 
 module.exports = {
   entry: {
-    'ContactBot': ['react', PATHS.src],
-    // vendor: ['react', 'react-dom', 'jquery']
+    client: ['react', PATHS.src1],
+    server: [PATHS.src2]
   },
   output: {
     path: PATHS.dist,
-    filename: '[name].js'
+    filename: '[name].ContactBot.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      src: PATHS.src,
-      root: PATHS.root
+      stylesRoot: PATHS.src1 + '/style',
+      src: PATHS.src1
     }
   },
   module: {

@@ -13,7 +13,13 @@ npm install
 To start the server:
 
 ```
-npm run start
+npm start
+```
+
+Import the client module into your app with:
+
+```
+import ContactBot from '../components/client'; //ES6
 ```
 
 ## Built With
